@@ -1,17 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Data from './App'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class Table extends React.Component {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  constructor() {
+    super();
+    this.state = {color: "red"}
+  }
+
+  render() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Sensor ID</th>
+            <th>Dev ID</th>
+            <th>Serial Number</th>
+            <th>Port</th>
+            <th>Counter</th>
+            <th>Payload Raw</th>
+            <th>Metadata</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <Data />
+      </table>
+    )
+  }
+}
+
+ReactDOM.render(<Table />, document.getElementById('root'));
