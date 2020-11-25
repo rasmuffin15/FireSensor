@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Data from './App'
+import Data from './Data'
 
 class Table extends React.Component {
 
