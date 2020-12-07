@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class Data extends React.Component {
 
   constructor(props) {
@@ -40,36 +41,50 @@ class Data extends React.Component {
       return <>Loading...</>;
     } else {
       return (
-        <tbody>
-          {items.map(item => (
+        <table>
+          <thead>
             <tr>
-              <td key = {item.id}>
-                {item.id}
-              </td>
-              <td key = {item.dev_id}>
-                {item.dev_id}
-              </td>
-              <td key = {item.h_serial}>
-                {item.h_serial}
-              </td>
-              <td key = {item.port}>
-                {item.port}
-              </td>
-              <td key = {item.counter}>
-                {item.counter}
-              </td>
-              <td key = {item.payload_raw}>
-                {item.payload_raw}
-              </td>
-              <td>
-                Filler
-              </td>
-              <td key = {item.url}>
-                {item.url}
-              </td>
+              <th>Sensor ID</th>
+              <th>Dev ID</th>
+              <th>Serial Number</th>
+              <th>Port</th>
+              <th>Counter</th>
+              <th>Payload Raw</th>
+              <th>Metadata</th>
+              <th>Link</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+            {items.map(item => (
+              <tr>
+                <td key = {item.id}>
+                  {item.id}
+                </td>
+                <td key = {item.dev_id}>
+                  {item.dev_id}
+                </td>
+                <td key = {item.h_serial}>
+                  {item.h_serial}
+                </td>
+                <td key = {item.port}>
+                  {item.port}
+                </td>
+                <td key = {item.counter}>
+                  {item.counter}
+                </td>
+                <td key = {item.payload_raw}>
+                  {item.payload_raw}
+                </td>
+                <td>
+                  Filler
+                </td>
+                <td key = {item.url}>
+                  {item.url}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )
     }
   }

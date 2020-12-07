@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Data from './Data'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+import Routes from './routes'
 
-class Table extends React.Component {
+class Home extends React.Component {
 
   constructor() {
     super();
@@ -11,23 +12,18 @@ class Table extends React.Component {
 
   render() {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Sensor ID</th>
-            <th>Dev ID</th>
-            <th>Serial Number</th>
-            <th>Port</th>
-            <th>Counter</th>
-            <th>Payload Raw</th>
-            <th>Metadata</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <Data />
-      </table>
-    )
+      <Router>
+            <div>
+                <p>Click the link to go to next page</p>
+                <ul>
+                    <li><Link onClick={() => window.location.href = "/tableData"}>Sensor Data</Link></li>
+                </ul>
+            </div>
+        </Router> 
+    );
   }
 }
 
-ReactDOM.render(<Table />, document.getElementById('root'));
+export default Home;
+
+ReactDOM.render(<Routes />, document.getElementById('root'));
