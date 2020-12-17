@@ -4,6 +4,7 @@ import Error from './Error'
 
 import Data from './Data';
 import Home from './index';
+import Table from './Table'
 
 
 class Routes extends React.Component {
@@ -13,7 +14,7 @@ class Routes extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route path="/tableData" component={Data} />    
+                        <Route path="/sensors" component={Table} />    
                         <Route component={Error}/>
                     </Switch>
                 </div>

@@ -16,7 +16,7 @@ class Home extends React.Component {
             <div>
                 <p>Click the link to go to next page</p>
                 <ul>
-                    <li><Link onClick={() => window.location.href = "/tableData"}>Sensor Data</Link></li>
+                    <li><Link onClick={() => window.location.href = "/sensors"}>Sensor Data</Link></li>
                 </ul>
             </div>
         </Router> 
