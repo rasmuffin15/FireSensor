@@ -26,7 +26,7 @@ exports.handler = async (event, context) => {
        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
    };
 
-   console.log(event);
+   console.log(event.body);
 
    try {
        switch (event.httpMethod) {
@@ -34,23 +34,41 @@ exports.handler = async (event, context) => {
                throw new Error(`Unsupported method 1"${event.httpMethod}"`);
            case 'GET':
                body = await pgc.query(
-                  `select * from testTable`
+                  `select * from sensorJSON`
                   );
                await pgc.end()
-               console.log(body.rows)
+               //console.log(body.rows)
                break;
            case 'POST':
-               const alarm = event.body['alarm']
-               const data_version = event.body['data_version']
-               const hweui = event.body['hweui']
-               const real_humidity = event.body['real_humidity']
-               const temp = event.body['temp']
-               const vdd = event.body['vdd']
 
-               body = await pgc.query('INSERT INTO testTable (alarm, dataVersion, hwid, real_humidity, temp, vdd) ' +
-               'VALUES(' + alarm + ',' + data_version + ',\'' + hweui + '\',' + real_humidity + ',' + temp + ',' + vdd + ')')
-               console.log(body)
-               break;
+                const data = JSON.parse(event.body)
+
+                const id = data.app_id
+                const dev_id = data.dev_id
+                const h_serial = data.hardware_serial
+                const port = data.port
+                const counter = data.counter
+                const payload_raw = data.payload_raw
+                const payload_fields = data.payload_fields
+                const metadata = data.metadata
+                const url = data.downlink_url
+
+                sqlAll = 'INSERT INTO allSensorData (hweui, vdd, temp, humidity, aq, time) ' +
+                'VALUES(\'' + payload_fields.hweui + '\',\'' + payload_fields.vdd + '\',\'' +
+                payload_fields.temp + '\',\'' + payload_fields.real_humidity + '\',\' N/A ,\'' +
+                metadata.gateways.time + '\')'
+
+                sqlUnique = 'UPDATE '
+
+                console.log('INSERT INTO sensorJSON (id, dev_id, h_serial, port, counter, payload_raw, metadata, url, payload_fields) ' + 
+                'VALUES(\'' + id + '\',\'' + dev_id + '\',\'' + h_serial + '\',' + port + ',' + counter + ',\'' + payload_raw + '\',\'' + JSON.stringify(metadata) + '\',\'' + url + 
+                '\',\'' + JSON.stringify(payload_fields) + '\')')
+
+                body = await pgc.query('INSERT INTO sensorJSON (id, dev_id, h_serial, port, counter, payload_raw, metadata, url, payload_fields) ' + 
+                'VALUES(\'' + id + '\',\'' + dev_id + '\',\'' + h_serial + '\',' + port + ',' + counter + ',\'' + payload_raw + '\',\'' + JSON.stringify(metadata) + '\',\'' + url + 
+                '\',\'' + JSON.stringify(payload_fields) + '\')') 
+                
+                break;
            case 'PUT':
                throw new Error(`Unsupported method 2"${event.httpMethod}"`);
            default:
