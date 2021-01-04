@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Link } from 'react-router-dom'
-import Routes from './routes'
+import Route from './routes'
 
 class Home extends React.Component {
 
@@ -16,7 +16,7 @@ class Home extends React.Component {
             <div>
                 <p>Click the link to go to next page</p>
                 <ul>
-                    <li><Link onClick={() => window.location.href = "/sensors"}>Sensor Data</Link></li>
+                    <li><Link to="/sensors" onClick={() => window.location.href = "/sensors"}>Sensor Data</Link></li>
                 </ul>
             </div>
         </Router> 
@@ -26,4 +26,4 @@ class Home extends React.Component {
 
 export default Home;
 
-ReactDOM.render(<Routes />, document.getElementById('root'));
+ReactDOM.render(<Route />, document.getElementById('root'));

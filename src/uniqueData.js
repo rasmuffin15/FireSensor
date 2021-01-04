@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Data extends React.Component {
+class uniqueData extends React.Component {
 
   constructor(props) {
     super(props);
@@ -44,42 +44,34 @@ class Data extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>Sensor ID</th>
-              <th>Dev ID</th>
-              <th>Serial Number</th>
-              <th>Port</th>
-              <th>Counter</th>
-              <th>Payload Raw</th>
-              <th>Metadata</th>
-              <th>Link</th>
+              <th>HWEUI</th>
+              <th>VDD</th>
+              <th>Temp</th>
+              <th>Humidity</th>
+              <th>Air Quality</th>
+              <th>Time</th>
             </tr>
           </thead>
           <tbody>
             {items.map(item => (
               <tr>
-                <td key = {item.id}>
-                  {item.id}
+                <td key = {item.hweui}>
+                  {item.hweui}
                 </td>
-                <td key = {item.dev_id}>
-                  {item.dev_id}
+                <td key = {item.vdd}>
+                  {item.vdd}
                 </td>
-                <td key = {item.h_serial}>
-                  {item.h_serial}
+                <td key = {item.temp}>
+                  {item.temp}
                 </td>
-                <td key = {item.port}>
-                  {item.port}
+                <td key = {item.humidity}>
+                  {item.humidity}
                 </td>
-                <td key = {item.counter}>
-                  {item.counter}
+                <td key = {item.aq}>
+                  {item.aq}
                 </td>
-                <td key = {item.payload_raw}>
-                  {item.payload_raw}
-                </td>
-                <td>
-                  Filler
-                </td>
-                <td key = {item.url}>
-                  {item.url}
+                <td key = {item.time}>
+                  {item.time}
                 </td>
               </tr>
             ))}
@@ -90,4 +82,4 @@ class Data extends React.Component {
   }
 }
 
-export default Data;
+export default uniqueData;

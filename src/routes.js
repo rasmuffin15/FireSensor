@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import Error from './Error'
 
-import Data from './Data';
+import Error from './Error';
+import uniqueData from './uniqueData';
 import Home from './index';
-import Table from './Table'
+
 
 
 class Routes extends React.Component {
@@ -14,7 +14,7 @@ class Routes extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route path="/sensors" component={Table} />    
+                        <Route path="/sensors" component={uniqueData} />    
                         <Route component={Error}/>
                     </Switch>
                 </div>
