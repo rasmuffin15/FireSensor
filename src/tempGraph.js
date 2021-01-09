@@ -1,6 +1,7 @@
 import React from 'react';
 import { VictoryChart, VictoryZoomContainer, 
-        VictoryLine } from 'victory'
+        VictoryLine, 
+        VictoryAxis} from 'victory'
 
 //Need to call this page with unique hwuei
 //Make Lambda call to get all temp/time data for hwuei
@@ -15,9 +16,8 @@ class tempGraph extends React.Component {
         };
     }
 
-    //change lambda to only get temp and time row
     componentDidMount() {
-        fetch("https://1tmpf2bpja.execute-api.us-west-2.amazonaws.com/default/sensor")
+        fetch(`https://1tmpf2bpja.execute-api.us-west-2.amazonaws.com/default/sensor?hweui=${this.props.match.params.hweui}`)
           .then(res => res.json())
           .then(
             (result) => {
@@ -43,6 +43,15 @@ class tempGraph extends React.Component {
     
     render() {
         const { error, isLoaded, items } = this.state;
+
+        let tData = []
+
+        for(var i = 0; i < items.length; i++) {
+          let datapoint = {x: new Date(items[i].time), y: Number(items[i].temp)}
+          tData[i] = datapoint
+        }
+
+        console.log(tData)
         if (error) {
           return <>Error: {error.message}</>;
         } else if (!isLoaded) {
@@ -50,27 +59,35 @@ class tempGraph extends React.Component {
         } else {
           return (
             <div>
-                <VictoryChart
-                    width={550}
-                    height={300}
-                    scale={{x: "time"}}
-                    containerComponent={
-                        <VictoryZoomContainer responsive={false}
-                            zoomDimension="x"
-                            zoomDomain={this.state.zoomDomain}
-                            onZoomDomainChange={this.handleZoom.bind(this)}
-                        />
-                    }
-                >
-                    <VictoryLine 
-                        style={{
-                            data: {stroke: "tomato"}
-                        }}
-                        data={/*Need an array here*/}
-                    />
-
-                </VictoryChart>
+              <VictoryChart 
+                width={800}
+                height={800}
+                scale={{x: "time"}}
+                containerComponent={
+                  <VictoryZoomContainer responsive={false}
+                    zoomDimension="x"
+                    zoomDomain={this.state.zoomDomain}
+                    onZoomDomainChange={this.handleZoom.bind(this)}
+                  />
+                }
+              >
+                <VictoryAxis
+                  tickFormat={(x) => new Date(x).getDay() + ':' + new Date(x).getHours() + ':' + new Date(x).getMinutes()}
+                />
+                <VictoryAxis 
+                  dependentAxis
+                  tickFormat={(y) => y}
+                />
+                <VictoryLine 
+                  style={{
+                    data: {stroke: "tomato"}
+                  }}
+                  data={tData}
+                />
+              </VictoryChart>
             </div>
         );}
     }
 }
+
+export default tempGraph;

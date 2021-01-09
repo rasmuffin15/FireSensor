@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 
 class uniqueData extends React.Component {
@@ -55,9 +56,11 @@ class uniqueData extends React.Component {
           <tbody>
             {items.map(item => (
               <tr>
-                <td key = {item.hweui}>
-                  {item.hweui}
-                </td>
+                <Router>
+                  <td key = {item.hweui}>
+                    <Link to={{pathname: `/sensors/${item.hweui}`, query: {hweui: 'abc123'}}} onClick={() => window.location.href = "/sensors/" + item.hweui}>{item.hweui}</Link>
+                  </td>
+                </Router>
                 <td key = {item.vdd}>
                   {item.vdd}
                 </td>
