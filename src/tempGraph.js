@@ -1,11 +1,8 @@
 import React from 'react';
 import { VictoryChart, VictoryZoomContainer, 
-        VictoryLine, 
-        VictoryAxis} from 'victory'
+        VictoryLine, VictoryAxis} from 'victory'
 
-//Need to call this page with unique hwuei
-//Make Lambda call to get all temp/time data for hwuei
-class tempGraph extends React.Component {
+class TempGraph extends React.Component {
     
     constructor() {
         super();
@@ -15,9 +12,10 @@ class tempGraph extends React.Component {
             items: []
         };
     }
-
+    
     componentDidMount() {
-        fetch(`https://1tmpf2bpja.execute-api.us-west-2.amazonaws.com/default/sensor?hweui=${this.props.match.params.hweui}`)
+        console.log(this.props.hweui)
+        fetch(`https://1tmpf2bpja.execute-api.us-west-2.amazonaws.com/default/sensor?hweui=${this.props.hweui}`)
           .then(res => res.json())
           .then(
             (result) => {
@@ -90,4 +88,4 @@ class tempGraph extends React.Component {
     }
 }
 
-export default tempGraph;
+export default TempGraph;

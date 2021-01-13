@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 
+import graph from './graph'
 
 class uniqueData extends React.Component {
 
@@ -42,44 +43,26 @@ class uniqueData extends React.Component {
       return <>Loading...</>;
     } else {
       return (
-        <table>
-          <thead>
-            <tr>
-              <th>HWEUI</th>
-              <th>VDD</th>
-              <th>Temp</th>
-              <th>Humidity</th>
-              <th>Air Quality</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map(item => (
+        <div>
+          <table>
+            <thead>
               <tr>
-                <Router>
-                  <td key = {item.hweui}>
-                    <Link to={{pathname: `/sensors/${item.hweui}`, query: {hweui: 'abc123'}}} onClick={() => window.location.href = "/sensors/" + item.hweui}>{item.hweui}</Link>
-                  </td>
-                </Router>
-                <td key = {item.vdd}>
-                  {item.vdd}
-                </td>
-                <td key = {item.temp}>
-                  {item.temp}
-                </td>
-                <td key = {item.humidity}>
-                  {item.humidity}
-                </td>
-                <td key = {item.aq}>
-                  {item.aq}
-                </td>
-                <td key = {item.time}>
-                  {item.time}
-                </td>
+                <th>HWEUI</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {items.map(item => (
+                <tr>
+                  <Router>
+                    <td key = {item.hweui}>
+                      <Link to={{pathname: `/sensors/${item.hweui}`, query: {hweui: 'abc123'}}} onClick={() => window.location.href = "/sensors/" + item.hweui}>{item.hweui}</Link>
+                    </td>
+                  </Router>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )
     }
   }
