@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Home from './index';
+import Home from '../index';
 import Graph from './graph'
 import Error from './Error';
 

@@ -56,10 +56,10 @@ class TempGraph extends React.Component {
           return <>Loading...</>;
         } else {
           return (
-            <div>
+            <div id="tempGraph">
               <VictoryChart 
-                width={800}
-                height={800}
+                width={400}
+                height={400}
                 scale={{x: "time"}}
                 containerComponent={
                   <VictoryZoomContainer responsive={false}

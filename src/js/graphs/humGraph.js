@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { VictoryChart, VictoryZoomContainer, 
     VictoryLine, VictoryAxis} from 'victory'
 
-class PartIRGraph extends React.Component {
+class HumGraph extends React.Component {
 
     constructor() {
         super();
@@ -10,7 +10,7 @@ class PartIRGraph extends React.Component {
             error: null,
             isLoaded: false,
             items: []
-        }
+        };
     }
 
     componentDidMount() {
@@ -44,7 +44,7 @@ class PartIRGraph extends React.Component {
         let tData = []
 
         for(var i = 0; i < items.length; i++) {
-          let datapoint = {x: new Date(items[i].time), y: Number(items[i].maxpartid)}
+          let datapoint = {x: new Date(items[i].time), y: Number(items[i].humidity)}
           tData[i] = datapoint
         }
 
@@ -54,10 +54,10 @@ class PartIRGraph extends React.Component {
             return <>Loading...</>;
           } else {
             return (
-              <div>
+              <div id="humGraph">
                 <VictoryChart 
-                  width={800}
-                  height={800}
+                  width={400}
+                  height={400}
                   scale={{x: "time"}}
                   containerComponent={
                     <VictoryZoomContainer responsive={false}
@@ -86,4 +86,4 @@ class PartIRGraph extends React.Component {
     }
 }
 
-export default PartIRGraph;
+export default HumGraph;

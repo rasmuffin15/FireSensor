@@ -1,0 +1,14 @@
+#wrapper {
+    display: flex;
+}
+
+#gdiv1 {
+    display: inline-block;
+    width: 200px;
+    background: lightblue;
+}
+
+#gdiv2 {
+    flex: 1;
+    background: lightgreen;
+}

@@ -1,16 +1,18 @@
 import React from 'react';
 
-import TempGraph from './tempGraph'
-import HumGraph from './humGraph'
-import PartIRGraph from './partIRGraph'
+import '../css/graph.css'
+
+import TempGraph from './graphs/tempGraph'
+import HumGraph from './graphs/humGraph'
+import MaxIRGraph from './graphs/maxIRGraph'
 
 function GraphVerdict(props) {
     if(props.hweui !== "") {
         return(
-            <div>
+            <div id="gdiv2">
                 <TempGraph hweui = {props.hweui} />
                 <HumGraph hweui = {props.hweui} />
-                <PartIRGraph hweui = {props.hweui} />
+                <MaxIRGraph hweui = {props.hweui} />
             </div>
         )
     } else {
@@ -43,28 +45,29 @@ class Graph extends React.Component {
                 items: result.rows
               });
             },
-    
             (error) => {
               this.setState({
                 isLoaded: true,
                 error
               });
             }
-          )
-      }
+        )
+    }
 
     render() {
         const hID = this.state.hweui;
         const items = this.state.items;
-        return(
-            <div>
-                <ul>
-                    {items.map(item => (
-                        <li id={item.hweui} value={item.hweui} onClick={this.handleHweuiClick}>
-                            {item.hweui}
-                        </li>
-                    ))}
-                </ul>
+        return( 
+            <div id="wrapper">
+                <div id="gdiv1">
+                    <ul>
+                        {items.map(item => (
+                            <li id={item.hweui} value={item.hweui} onClick={this.handleHweuiClick}>
+                                {item.hweui}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
                 <GraphVerdict 
                     hweui={hID}
                 />
