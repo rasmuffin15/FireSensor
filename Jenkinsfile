@@ -1,13 +1,10 @@
 pipeline {
-  agent any
-
-  tools {nodejs "nodejs"}
-
-  stages {
-    stage('Example') {
-      steps {
-        sh 'npm config ls'
-      }
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                sh 'go version'
+            }
+        }
     }
-  }
 }
